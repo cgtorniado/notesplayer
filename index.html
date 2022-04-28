@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div class="container mx-auto p-5">
+        <div class="container keyholder mx-auto p-5">
+            <button type="button" class="btn btn-primary" value="soundc" id="btn">C</button>
+            <button type="button" class="btn btn-primary" value="soundd" id="btn">D</button>
+            <button type="button" class="btn btn-primary" value="sounde" id="btn">E</button>
+            <button type="button" class="btn btn-primary" value="soundf" id="btn">F</button>
+            <button type="button" class="btn btn-primary" value="soundg" id="btn">G</button>
+            <button type="button" class="btn btn-primary" value="sounda" id="btn">A</button>
+            <button type="button" class="btn btn-primary" value="soundb" id="btn">B</button>
+            <button type="button" class="btn btn-primary" value="soundc2" id="btn">C2 </button>
+        </div>
+
+        <div class="px-5 pb-5">
+            <label for="textarea" class="form-label">Played Keys</label>
+            <textarea class="form-control" id="textarea" rows="3"></textarea>
+        </div>
+
+        <div class="px-5">
+
+            <div class="py-3">
+
+                <label for="playarea" class="form-label">Play Keys</label>
+                <textarea class="form-control" id="playarea" rows="3"></textarea>
+
+            </div>
+
+
+            <button id="play" class="btn btn-primary">play me</button>
+        </div>
+
+
+
+    </div>
+
+    <audio id="soundc" src="AUDIO/1 c4.mp3"></audio>
+    <audio id="soundd" src="AUDIO/2 d4.mp3"></audio>
+    <audio id="sounde" src="AUDIO/3 e4.mp3"></audio>
+    <audio id="soundf" src="AUDIO/4 f4.mp3"></audio>
+    <audio id="soundg" src="AUDIO/5 g4.mp3"></audio>
+    <audio id="sounda" src="AUDIO/6 a5.mp3"></audio>
+    <audio id="soundb" src="AUDIO/7 b5.mp3"></audio>
+    <audio id="soundc2" src="AUDIO/8 c5.mp3"></audio>
+
+    <!-- BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <script>
+        let inputnote = document.getElementById("textarea")
+
+        let noteclicked = document.getElementsByTagName("button")
+        let outputkey = document.getElementById("textarea")
+
+
+        const userSelection = Object.values(noteclicked)
+        userSelection.forEach(key => {
+            key.addEventListener("click", play)
+        })
+
+
+        function play() {
+            let note = this.value
+            let note2 = document.getElementById(note)
+            note2.play()
+
+            console.log(note)
+            console.log(note2)
+            console.log("this audio has been played " + this.value)
+
+            outputkey.innerHTML += this.innerHTML
+        }
+
+
+        let playbtn = document.getElementById("play")
+        let playcontent = document.getElementById("playarea")
+
+        playbtn.addEventListener("click", () => {
+
+            let notearray = Array.from(playcontent.value)
+            console.log(notearray)
+
+
+
+            for (items in notearray) {
+
+                let c = "sound" + notearray[items]
+                console.log(c)
+
+                let note3 = document.getElementById(c)
+                console.log(note3)
+
+
+                setTimeout(function () {
+                    note3.play()
+                }, 1000 * items)
+
+                outputkey.innerHTML += notearray[items] + ","
+
+            }
+
+
+        })
+    </script>
+</body>
+
+</html>
